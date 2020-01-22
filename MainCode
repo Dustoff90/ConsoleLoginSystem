@@ -1,0 +1,49 @@
+users = {}
+status = ""
+
+def displayMenu():
+    status = input("\nAre you a registered user? (Y/N)"" Type 'exit' to exit terminal: ")
+    if status == 'exit':
+        exit()
+    if status == 'EXIT':
+        exit()
+    if status == 'y':
+        oldUser()
+    elif status == 'Y':
+        oldUser()
+    elif status == 'n':
+        newUser()
+    elif status == 'N':
+        newUser()
+
+def newUser():
+    createLogin = input("\nCreate username: ")
+        
+    while createLogin in users:
+        print("\nUsername is already taken, please pick a different one.")
+        createLogin = input("\nCreate username or type back to go back to the main menu: ")
+    if createLogin == 'back':
+        displayMenu()
+    else:
+        createLogin != users
+        createPW = input("\nCreate password: ")
+        confirmPW = input("\nConfirm password: ")
+        users[createLogin] = createPW
+
+        while createPW != confirmPW:
+            print("Passwords do not match.")
+            confirmPW = input("Confirm password: ")
+        else:
+            print("\nUser created! Welcome",createLogin + "!")
+
+def oldUser():
+    login = input("\nEnter username: ")
+    passW = input("\nEnter password: ")
+
+    if login in users and users[login] == passW:
+        print("\nLogin successful!\n")
+    else:
+        print("\nUsername doesn't exist or incorrect password.\n")
+
+while status != 'q':
+    displayMenu()
