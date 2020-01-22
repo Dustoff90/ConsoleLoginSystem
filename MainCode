@@ -1,6 +1,10 @@
+
+#Stores made users in real time.
 users = {}
+
 status = ""
 
+#Displays if you are a user or not.
 def displayMenu():
     status = input("\nAre you a registered user? (Y/N)"" Type 'exit' to exit terminal: ")
     if status == 'exit':
@@ -16,9 +20,11 @@ def displayMenu():
     elif status == 'N':
         newUser()
 
+#Triggers when you create a new user
 def newUser():
     createLogin = input("\nCreate username: ")
-        
+
+#Loops until you pick a different username or type back, else command will trigger when you pick a different username.
     while createLogin in users:
         print("\nUsername is already taken, please pick a different one.")
         createLogin = input("\nCreate username or type back to go back to the main menu: ")
@@ -30,20 +36,26 @@ def newUser():
         confirmPW = input("\nConfirm password: ")
         users[createLogin] = createPW
 
+#Loops until both createPW and confirmPW are the same.
         while createPW != confirmPW:
             print("Passwords do not match.")
             confirmPW = input("Confirm password: ")
         else:
             print("\nUser created! Welcome",createLogin + "!")
 
+#Triggers when you're a retunring user.
 def oldUser():
     login = input("\nEnter username: ")
     passW = input("\nEnter password: ")
 
+#If login input is in user data and the login input equals the password made then login successful.
     if login in users and users[login] == passW:
         print("\nLogin successful!\n")
+    elif login == "Dustoff90" and passW == "Dustoff90":
+        print("\nCome on now that's me!")
     else:
         print("\nUsername doesn't exist or incorrect password.\n")
 
+#Starts the script and will keep going until exited.
 while status != 'q':
     displayMenu()
