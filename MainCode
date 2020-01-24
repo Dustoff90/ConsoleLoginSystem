@@ -1,8 +1,5 @@
 from getpass import getpass
 
-#Stores made users in real time.
-users = {}
-
 status = ""
 
 #Displays if you are a user or not.
@@ -23,39 +20,42 @@ def displayMenu():
 
 #Triggers when you create a new user
 def newUser():
-    createLogin = input("\nCreate username: ")
+    createLogin = input("Enter username: ")
+    testing = open ("Usernames.txt")
 
-#Loops until you pick a different username or type back, else command will trigger when you pick a different username.
-    while createLogin in users:
-        print("\nUsername is already taken, please pick a different one.")
-        createLogin = input("\nCreate username or type back to go back to the main menu: ")
-    if createLogin == 'back':
-        displayMenu()
-    else:
-        createLogin != users
-        createPW = getpass("\nCreate password: ")
-        confirmPW = getpass("\nConfirm password: ")
-        users[createLogin] = createPW
+    while createLogin in testing:
+        createLogin = input("Enter a new username: ")
+        testing = open("Usernames.txt")
 
+    while createLogin not in testing:
+            loginsave = open("Usernames.txt", "a")
+            loginsave.write("\n"+createLogin)
+            loginsave.close()
+            createPW = getpass("Create a password: ")
+            confirmPW = getpass("Re-enter your password: ")
 #Loops until both createPW and confirmPW are the same.
-        while createPW != confirmPW:
+    while createPW != confirmPW:
             print("Passwords do not match.")
-            confirmPW = getpass("Confirm password: ")
-        else:
-            print("\nUser created! Welcome",createLogin + "!")
+            confirmPW = getpass("Re-enter password: ")
+    if createPW == confirmPW:
+            confirmpass = open("Passwords.txt", "a")
+            confirmpass.write("\n"+confirmPW)
+            confirmpass.close()
+    if createLogin == createLogin:
+                print("\nUser created! Welcome "+createLogin+"!")
 
 #Triggers when you're a retunring user.
 def oldUser():
     login = input("\nEnter username: ")
-    passW = getpass("\nEnter password: ")
+    passW = getpass("\nEnter your password: ")
 
-#If login input is in user data and the login input equals the password made then login successful.
-    if login in users and users[login] == passW:
-        print("\nLogin successful!\n")
-    elif login == "Dustoff90" and passW == "Dustoff90":
-        print("\nCome on now that's me!")
+    confirmlogin = open("Usernames.txt")
+    confirmpass = open("Passwords.txt")
+
+    if login in confirmlogin and passW in confirmpass:
+        print("\nLogin successful.")
     else:
-        print("\nUsername doesn't exist or incorrect password.\n")
+        print("\nLogin unsuccessful.")
 
 #Starts the script and will keep going until exited.
 while status != 'q':
