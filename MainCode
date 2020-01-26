@@ -1,3 +1,7 @@
+#For this to work please make a Username and a Password textfile (.txt) in the path directory you're loading this code from.
+
+#The U in Usernames in captial same with the P in Passwords.
+
 from getpass import getpass
 
 status = ""
@@ -49,6 +53,7 @@ def oldUser():
     login = input("\nEnter username: ")
     passW = getpass("\nEnter your password: ")
     confirmpass = open("Passwords.txt")
+    confirmlogin = open("Usernames.txt")
 
     if passW in confirmpass:
         print("\nLogin successful.")
