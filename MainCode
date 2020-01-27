@@ -50,16 +50,17 @@ def newUser():
 
 #Triggers when you're a retunring user.
 def oldUser():
-    login = input("\nEnter username: ")
-    passW = getpass("\nEnter your password: ")
+    input("\nEnter username: ")
+    passW = input("\nEnter your password: ")
     confirmpass = open("Passwords.txt")
-    confirmlogin = open("Usernames.txt")
 
-    if passW in confirmpass:
-        print("\nLogin successful.")
-    elif passW not in confirmpass:
-        print("\nLogin unsuccessful, Username or password are invalid.")
+    with open("Passwords.txt") as confirmpass:
+        if passW in confirmpass.read().strip():
+            print("\nLogin successful.")
+        else:
+            print("\nLogin unsuccessful.")
+
 
 #Starts the script and will keep going until exited.
-while status != 'q':
+while status != ' ':
     displayMenu()
