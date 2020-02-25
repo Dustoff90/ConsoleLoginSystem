@@ -1,14 +1,9 @@
-#For this to work please make a Username and a Password textfile (.txt) in the path directory you're loading this code from.
-
-#The U in Usernames in captial same with the P in Passwords.
-
 from getpass import getpass
-
 status = ""
 
 #Displays if you are a user or not.
 def displayMenu():
-    status = input("\nAre you a registered user? (Y/N)"" Type 'exit' to exit terminal: ")
+    status = input("Are you a registered user? (Y/N)"" Type 'exit' to exit terminal: ")
     if status == 'exit':
         exit()
     if status == 'EXIT':
@@ -25,15 +20,15 @@ def displayMenu():
 #Triggers when you create a new user
 def newUser():
     createLogin = input("Enter username: ")
-    testing = open ("Usernames.txt")
+    testing = open("usernames.txt", "r")
 
     while createLogin in testing:
         createLogin = input("Enter a new username: ")
-        testing = open("Usernames.txt")
+        testing = open("usernames.txt", "r")
 
     while createLogin not in testing:
-            loginsave = open("Usernames.txt", "a")
-            loginsave.write("\n"+createLogin)
+            loginsave = open("usernames.txt", "a")
+            loginsave.write("\n" + createLogin)
             loginsave.close()
             createPW = getpass("Create a password: ")
             confirmPW = getpass("Re-enter your password: ")
@@ -42,7 +37,7 @@ def newUser():
             print("Passwords do not match.")
             confirmPW = getpass("Re-enter password: ")
     if createPW == confirmPW:
-            confirmpass = open("Passwords.txt", "a")
+            confirmpass = open("passwords.txt", "a")
             confirmpass.write("\n"+confirmPW)
             confirmpass.close()
     if createLogin == createLogin:
@@ -51,15 +46,16 @@ def newUser():
 #Triggers when you're a retunring user.
 def oldUser():
     input("\nEnter username: ")
+    confirmpass = open("passwords.txt", "r")
     passW = input("\nEnter your password: ")
-    confirmpass = open("Passwords.txt")
 
-    with open("Passwords.txt") as confirmpass:
-        if passW in confirmpass.read().strip():
-            print("\nLogin successful.")
+    for i in passW:
+        if passW in confirmpass:
+            print("\nLogin Successful!")
+            break
         else:
-            print("\nLogin unsuccessful.")
-
+            print("\nLogin Unsuccessful, please try again.")
+            break
 
 #Starts the script and will keep going until exited.
 while status != ' ':
